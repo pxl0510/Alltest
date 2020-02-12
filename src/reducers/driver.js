@@ -4,11 +4,24 @@ const initState={
     List:[],
     Offset:1,
     Limit:10,
-    Count:0
+    Count:0,
+    isOpenAddDriverModal:false
 }
 
 export default (state=initState,action)=>{
     switch(action.type){
+        case actionTypes.OPEN_ADD_DRIVER_MODAL:{
+            console.log(action)
+            return {
+                ...state,
+                isOpenAddDriverModal:true
+            }
+        } 
+            case actionTypes.CLOSE_ADD_DRIVER_MODAL:
+                return {
+                    ...state,
+                    isOpenAddDriverModal:false
+                }
         case actionTypes.START_FETCH_DRIVER_LIST:
             return {
                 ...state,

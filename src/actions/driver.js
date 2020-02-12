@@ -24,7 +24,16 @@ const endFetchDriverList=()=>{
         type:actionTypes.END_FETCH_DRIVER_LIST
     }
 }
-
+export const openAddDriverModal=()=>{
+    return {
+        type:actionTypes.OPEN_ADD_DRIVER_MODAL
+    }
+}
+export const closeAddDriverModal=()=>{
+    return {
+        type:actionTypes.CLOSE_ADD_DRIVER_MODAL
+    }
+}
 export const fetchDriverList=(Limit=10,Offset=1,ii)=>{
     return (dispatch)=>{
         dispatch(startFetchDriverList());

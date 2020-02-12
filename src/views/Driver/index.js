@@ -1,7 +1,7 @@
 import React from "react";
 import { Button,Table } from 'antd';
- 
-import {fetchDriverList} from "../../actions/driver"
+import AddDriver from "./addDriver" 
+import {fetchDriverList,openAddDriverModal} from "../../actions/driver"
 import {connect} from "react-redux"
 const dataSource = [ ];
   
@@ -30,13 +30,24 @@ class Driver extends React.Component {
     componentDidMount(){
       this.props.fetchDriverList()
     }
+
+    add=()=>{
+     this.props.openAddDriverModal()
+    }
     handleTableChange=(pagination)=>{
       let Limit=pagination.pageSize,Offset=pagination.current;
       this.props.fetchDriverList(Limit,Offset)
     }
     render(){
      let {List,loading,Count,Offset}=this.props
-        return <Table 
+        return <div>
+          <div style={{ marginBottom: 16 }}>
+        <Button type="primary" onClick={this.add}  >
+          新增驱动
+        </Button>
+        <AddDriver/>
+        </div> 
+         <Table 
         rowKey={record => record.DriverID}
         dataSource={List}
         loading={loading}
@@ -44,6 +55,7 @@ class Driver extends React.Component {
         onChange={this.handleTableChange}
        columns={columns}
        />
+       </div>
     }
 }
 
@@ -54,4 +66,4 @@ const mapstate=state=>({
   Limit:state.driver.Limit,
   Offset:state.driver.Offset,
 })
-export default  connect(mapstate,{fetchDriverList})(Driver) 
+export default  connect(mapstate,{fetchDriverList,openAddDriverModal})(Driver) 
